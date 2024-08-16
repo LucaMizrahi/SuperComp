@@ -14,3 +14,9 @@ echo ""
 
 # Executa o executável do atv2
 # srun --ntasks=1 --cpus-per-task=1 --mem=500M ./atv2
+
+# Executa o executável do atv3
+# srun --ntasks=1 --cpus-per-task=1 --mem=500M ./atv3
+
+# Executa o executável do atv4
+# srun --ntasks=1 --cpus-per-task=1 --mem=500M ./atv4
