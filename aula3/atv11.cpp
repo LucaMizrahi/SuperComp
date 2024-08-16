@@ -52,7 +52,7 @@ int main() {
         }
     }
 
-    std::ofstream output("stats.txt");
+    std::ofstream output("output_11.txt");
     output << "Número total de palavras: " << total_words << std::endl;
     output << "Número total de linhas: " << total_lines << std::endl;
     output << "Número médio de palavras por linha: " << (double) total_words / total_lines << std::endl;

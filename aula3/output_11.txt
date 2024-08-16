@@ -1,0 +1,4 @@
+Número total de palavras: 7
+Número total de linhas: 2
+Número médio de palavras por linha: 3.5
+Palavra mais frequente: oi (2 ocorrências)
