@@ -1,5 +1,3 @@
-// Escreva um programa simples que exibe a mensagem "Olá, Mundo!" na tela.
-
 #include <iostream>
 
 int main() {

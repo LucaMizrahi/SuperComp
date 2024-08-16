@@ -1,6 +1,3 @@
-// Crie um programa que peça ao usuário para inserir dois números e uma operação (adição, subtração,
-//multiplicação ou divisão). O programa deve exibir o resultado da operação.
-
 #include <iostream>
 
 int main() {

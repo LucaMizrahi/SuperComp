@@ -1,5 +1,3 @@
-// Implemente o algoritmo de ordenação Bubble Sort para organizar um vetor de números em ordem crescente
-
 #include <iostream>
 
 int main() {

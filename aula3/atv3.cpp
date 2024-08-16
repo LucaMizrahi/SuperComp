@@ -1,6 +1,3 @@
-// Escreva um programa que peça ao usuário para inserir um número e informe se ele é
-//par ou ímpar.
-
 #include <iostream>
 
 int main() {

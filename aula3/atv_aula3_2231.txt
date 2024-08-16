@@ -1,5 +1,0 @@
-Executando atv1: 
-Olá, Mundo!
-
-Executando atv2: 
-Olá, Mundo!

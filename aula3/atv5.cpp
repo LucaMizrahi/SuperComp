@@ -1,5 +1,3 @@
-// Crie um programa que solicite ao usuário para inserir 5 números em um vetor e depois exiba a soma desses números
-
 #include <iostream>
 
 int main() {

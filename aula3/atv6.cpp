@@ -1,5 +1,3 @@
-// Escreva um programa que peça ao usuário para inserir 10 números em um vetor e determine qual é o maior número.
-
 #include <iostream>
 
 int main() {

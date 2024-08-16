@@ -1,5 +1,3 @@
-// Crie um programa que peça ao usuário para inserir uma matriz 3x3 e depois exiba a soma dos elementos na diagonal principal.
-
 #include <iostream>
 
 int main() {
