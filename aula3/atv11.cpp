@@ -1,7 +1,3 @@
-// Estatísticas de Texto: Escreva um programa que leia um arquivo de texto e calcule as seguintes
-// estatísticas: número total de palavras, número total de linhas, número médio de palavras por linha e a palavra mais frequente.
-// Em seguida, grave essas estatísticas em um novo arquivo de texto.
-
 #include <iostream>
 #include <fstream>
 #include <map>
