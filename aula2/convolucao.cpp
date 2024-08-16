@@ -5,7 +5,7 @@
 
 #define N 1000 // Define o tamanho da matriz NxN.
 #define FILTER_SIZE 5 // Define o tamanho do filtro 5x5.
-#define ITERATIONS 100 // Define o número de iterações de convolução.
+#define ITERATIONS 150 // Define o número de iterações de convolução.
 
 
 // Função para realizar a convolução em um elemento da matriz.
