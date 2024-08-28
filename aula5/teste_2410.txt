@@ -1,0 +1,12 @@
+Executando convolucao_basicao
+A tarefa levou 2.8115 segundos para ser executada
+ 
+Executando convolucao_O1
+A tarefa levou 0.755996 segundos para ser executada
+ 
+Executando convolucao_O2
+A tarefa levou 0.583918 segundos para ser executada
+ 
+Executando convolucao_O3
+A tarefa levou 0.257462 segundos para ser executada
+ 

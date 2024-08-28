@@ -1,0 +1,2 @@
+Gproof
+A tarefa levou 1.49649 segundos para ser executada
