@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
+#include <chrono>  // Biblioteca para medir o tempo de execução
 
 // Estrutura para representar um item
 struct item {
@@ -10,7 +11,7 @@ struct item {
     double valor;
 };
 
-// Função recursiva para resolver o problema da mochila (W -> capacidade da mochila, n -> número de itens)
+// Função recursiva para resolver o problema da mochila
 double knapsack(double W, const std::vector<item>& items, int n, double& peso_total, std::vector<int>& itens_selecionados) {
     // Caso base: sem itens ou capacidade zero
     if (n == 0 || W == 0) {
@@ -48,7 +49,7 @@ double knapsack(double W, const std::vector<item>& items, int n, double& peso_to
 }
 
 int main() {
-    std::ifstream inputFile("entrada4.txt");
+    std::ifstream inputFile("entrada1.txt");
     if (!inputFile.is_open()) {
         std::cerr << "Erro ao abrir o arquivo de entrada!" << std::endl;
         return 1;
@@ -69,7 +70,15 @@ int main() {
     double peso_total = 0;  // Peso total dos itens incluídos na mochila
     std::vector<int> itens_selecionados;  // Vetor para armazenar os índices dos itens selecionados
 
+    // Medir o tempo de início
+    auto start = std::chrono::high_resolution_clock::now();
+
+    // Calcular o valor máximo que pode ser obtido
     double max_value = knapsack(W, items, N, peso_total, itens_selecionados);
+
+    // Medir o tempo de fim
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> duration = end - start;
 
     std::cout << "O valor máximo que pode ser obtido é: " << max_value << std::endl;
     std::cout << "O peso total ocupado é: " << peso_total << " de um peso máximo de: " << W << std::endl;
@@ -78,6 +87,9 @@ int main() {
     for (int index : itens_selecionados) {
         std::cout << "Item " << items[index].id << " (Peso: " << items[index].peso << ", Valor: " << items[index].valor << ")" << std::endl;
     }
+
+    // Exibir o tempo de execução em segundos
+    std::cout << "Tempo de execução: " << duration.count() << " segundos" << std::endl;
 
     return 0;
 }
