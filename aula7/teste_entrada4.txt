@@ -1,0 +1,21 @@
+Executando problema da mochila - Entrada 4
+Busca Exaustiva:
+Valor máximo: 648
+Peso total: 600 de um peso máximo de: 600
+Itens selecionados na mochila: 0 1 3 4 5 7 8 9 10 12 13 14 15 16 17 21 22 24 26 27 28 
+Tempo de execução: 97.6605 segundos
+
+Heurística 1: Embaralhar e Preencher a Mochila
+Execução 1: Valor máximo: 485, Peso total: 599, Tempo de execução: 2.4514e-05 segundos
+Execução 2: Valor máximo: 481, Peso total: 589, Tempo de execução: 9.958e-06 segundos
+Execução 3: Valor máximo: 548, Peso total: 600, Tempo de execução: 9.668e-06 segundos
+Execução 4: Valor máximo: 522, Peso total: 600, Tempo de execução: 9.531e-06 segundos
+Execução 5: Valor máximo: 425, Peso total: 597, Tempo de execução: 9.509e-06 segundos
+
+Heurística 2: Seleção Aleatória Baseada em Probabilidade
+Execução 1: Valor máximo: 297, Peso total: 465, Tempo de execução: 1.4573e-05 segundos
+Execução 2: Valor máximo: 351, Peso total: 489, Tempo de execução: 1.0847e-05 segundos
+Execução 3: Valor máximo: 402, Peso total: 465, Tempo de execução: 1.0733e-05 segundos
+Execução 4: Valor máximo: 323, Peso total: 593, Tempo de execução: 1.0781e-05 segundos
+Execução 5: Valor máximo: 470, Peso total: 594, Tempo de execução: 1.1156e-05 segundos
+ 

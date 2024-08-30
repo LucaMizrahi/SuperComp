@@ -1,0 +1,21 @@
+Problema da Mochila - Entrada 2
+Busca Exaustiva:
+Valor máximo: 870
+Peso total: 239 de um peso máximo de: 239
+Itens selecionados na mochila: 8 19 24 33 37 40 44 53 56 59 61 68 69 70 72 74 
+Tempo de execução:   segundos
+
+Heurística 1: Embaralhar e Preencher a Mochila
+Execução 1: Valor máximo: 169, Peso total: 236, Tempo de execução: 2.146e-05 segundos
+Execução 2: Valor máximo: 246, Peso total: 238, Tempo de execução: 1.5153e-05 segundos
+Execução 3: Valor máximo: 372, Peso total: 237, Tempo de execução: 1.4875e-05 segundos
+Execução 4: Valor máximo: 297, Peso total: 235, Tempo de execução: 1.4429e-05 segundos
+Execução 5: Valor máximo: 182, Peso total: 234, Tempo de execução: 1.4792e-05 segundos
+
+Heurística 2: Seleção Aleatória Baseada em Probabilidade
+Execução 1: Valor máximo: 305, Peso total: 236, Tempo de execução: 2.4248e-05 segundos
+Execução 2: Valor máximo: 233, Peso total: 239, Tempo de execução: 2.0157e-05 segundos
+Execução 3: Valor máximo: 209, Peso total: 238, Tempo de execução: 2.0191e-05 segundos
+Execução 4: Valor máximo: 332, Peso total: 238, Tempo de execução: 2.0055e-05 segundos
+Execução 5: Valor máximo: 250, Peso total: 236, Tempo de execução: 1.9787e-05 segundos
+ 

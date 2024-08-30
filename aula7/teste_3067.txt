@@ -1,0 +1,21 @@
+Executando convolucao_basicao
+Busca Exaustiva:
+Valor máximo: 55
+Peso total: 10 de um peso máximo de: 10
+Itens selecionados na mochila: 1 3 4 
+Tempo de execução: 5.365e-06 segundos
+
+Heurística 1: Embaralhar e Preencher a Mochila
+Execução 1: Valor máximo: 40, Peso total: 5, Tempo de execução: 1.7183e-05 segundos
+Execução 2: Valor máximo: 55, Peso total: 10, Tempo de execução: 8.656e-06 segundos
+Execução 3: Valor máximo: 40, Peso total: 5, Tempo de execução: 8.536e-06 segundos
+Execução 4: Valor máximo: 40, Peso total: 5, Tempo de execução: 8.695e-06 segundos
+Execução 5: Valor máximo: 40, Peso total: 5, Tempo de execução: 8.651e-06 segundos
+
+Heurística 2: Seleção Aleatória Baseada em Probabilidade
+Execução 1: Valor máximo: 0, Peso total: 0, Tempo de execução: 1.0483e-05 segundos
+Execução 2: Valor máximo: 40, Peso total: 10, Tempo de execução: 8.759e-06 segundos
+Execução 3: Valor máximo: 55, Peso total: 10, Tempo de execução: 8.527e-06 segundos
+Execução 4: Valor máximo: 50, Peso total: 10, Tempo de execução: 8.786e-06 segundos
+Execução 5: Valor máximo: 35, Peso total: 9, Tempo de execução: 8.574e-06 segundos
+ 
