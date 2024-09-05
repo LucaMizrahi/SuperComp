@@ -201,7 +201,7 @@ double hill_climbing(double W, const std::vector<item>& items, double& peso_tota
 }
 
 int main() {
-    std::ifstream inputFile("entrada1.txt");
+    std::ifstream inputFile("entrada4.txt");
     if (!inputFile.is_open()) {
         std::cerr << "Erro ao abrir o arquivo de entrada!" << std::endl;
         return 1;
