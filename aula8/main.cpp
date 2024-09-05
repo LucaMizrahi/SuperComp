@@ -126,9 +126,82 @@ double mochila_cheia(double W, const std::vector<item>& items, double& peso_tota
     return valor_total;
 }
 
+// Algoritmo de Busca Local: Substituição de Objeto
+double substituicao_objeto(double W, const std::vector<item>& items, double& peso_total, std::vector<int>& itens_selecionados) {
+    // Inicializa a solução aleatória
+    double valor_total = mochila_cheia(W, items, peso_total, itens_selecionados);
+
+    bool melhorou;
+    do {
+        melhorou = false;
+        for (size_t i = 0; i < items.size(); ++i) {
+            if (std::find(itens_selecionados.begin(), itens_selecionados.end(), items[i].id) != itens_selecionados.end()) continue;  // Pula os itens já usados
+
+            for (size_t j = 0; j < itens_selecionados.size(); ++j) {
+                double peso_novo = peso_total - items[itens_selecionados[j] - 1].peso + items[i].peso;
+                double valor_novo = valor_total - items[itens_selecionados[j] - 1].valor + items[i].valor;
+
+                if (peso_novo <= W && valor_novo > valor_total) {
+                    peso_total = peso_novo;
+                    valor_total = valor_novo;
+                    itens_selecionados[j] = items[i].id;  // Troca o item
+                    melhorou = true;
+                    break;
+                }
+            }
+            if (melhorou) break;  // Reinicia a busca se houve melhoria
+        }
+    } while (melhorou);
+
+    return valor_total;
+}
+
+// Algoritmo de Busca Local: Hill Climbing
+double hill_climbing(double W, const std::vector<item>& items, double& peso_total, std::vector<int>& itens_selecionados) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, 1);
+
+    std::vector<int> solucao(items.size(), 0);
+    peso_total = 0;
+    double valor_total = 0;
+
+    // Gera uma solução inicial aleatória
+    for (size_t i = 0; i < items.size(); ++i) {
+        solucao[i] = dis(gen);
+        if (solucao[i] == 1 && peso_total + items[i].peso <= W) {
+            peso_total += items[i].peso;
+            valor_total += items[i].valor;
+            itens_selecionados.push_back(items[i].id);
+        } else {
+            solucao[i] = 0;  // Não pode adicionar o item devido ao limite de peso
+        }
+    }
+
+    bool melhorou;
+    do {
+        melhorou = false;
+        for (size_t i = 0; i < items.size(); ++i) {
+            if (solucao[i] == 0 && peso_total + items[i].peso <= W) {
+                solucao[i] = 1;  // Tenta adicionar o item
+                double novo_valor_total = valor_total + items[i].valor;
+                if (novo_valor_total > valor_total) {
+                    valor_total = novo_valor_total;
+                    peso_total += items[i].peso;
+                    itens_selecionados.push_back(items[i].id);
+                    melhorou = true;
+                } else {
+                    solucao[i] = 0;  // Não houve melhoria, reverte a adição
+                }
+            }
+        }
+    } while (melhorou);
+
+    return valor_total;
+}
 
 int main() {
-    std::ifstream inputFile("entrada3.txt");
+    std::ifstream inputFile("entrada1.txt");
     if (!inputFile.is_open()) {
         std::cerr << "Erro ao abrir o arquivo de entrada!" << std::endl;
         return 1;
@@ -146,50 +219,46 @@ int main() {
 
     inputFile.close();
 
-    // Busca exaustiva
-    double peso_total_exaustiva = 0;
-    std::vector<int> itens_selecionados_exaustiva;
-    auto start_exaustiva = std::chrono::high_resolution_clock::now();
-    double max_value_exaustiva = knapsack(W, items, N, peso_total_exaustiva, itens_selecionados_exaustiva);
-    auto end_exaustiva = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> duration_exaustiva = end_exaustiva - start_exaustiva;
-
-    std::cout << "Busca Exaustiva:" << std::endl;
-    std::cout << "Valor máximo: " << max_value_exaustiva << std::endl;
-    std::cout << "Peso total: " << peso_total_exaustiva << " de um peso máximo de: " << W << std::endl;
-    std::cout << "Itens selecionados na mochila: ";
-    for (int index : itens_selecionados_exaustiva) {
-        std::cout << index << " ";
-    }
-    std::cout << std::endl;
-    std::cout << "Tempo de execução: " << duration_exaustiva.count() << " segundos" << std::endl;
-
-    // Heurística 1: Embaralhar e Preencher a Mochila
-    std::cout << "\nHeurística 1: Embaralhar e Preencher a Mochila" << std::endl;
+    // Algoritmo: Mochila Cheia
+    std::cout << "\nAlgoritmo: Mochila Cheia" << std::endl;
     for (int i = 0; i < 5; ++i) {
-        double peso_total_heuristica1 = 0;
-        std::vector<int> itens_selecionados_heuristica1;
-        auto start_heuristica1 = std::chrono::high_resolution_clock::now();
-        double max_value_heuristica1 = heuristic_shuffle_fill(W, items, peso_total_heuristica1, itens_selecionados_heuristica1);
-        auto end_heuristica1 = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> duration_heuristica1 = end_heuristica1 - start_heuristica1;
+        double peso_total_cheia = 0;
+        std::vector<int> itens_selecionados_cheia;
+        auto start_cheia = std::chrono::high_resolution_clock::now();
+        double max_value_cheia = mochila_cheia(W, items, peso_total_cheia, itens_selecionados_cheia);
+        auto end_cheia = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> duration_cheia = end_cheia - start_cheia;
 
-        std::cout << "Execução " << i + 1 << ": Valor máximo: " << max_value_heuristica1
-                  << ", Peso total: " << peso_total_heuristica1 << ", Tempo de execução: " << duration_heuristica1.count() << " segundos" << std::endl;
+        std::cout << "Execução " << i + 1 << ": Valor máximo: " << max_value_cheia
+                  << ", Peso total: " << peso_total_cheia << ", Tempo de execução: " << duration_cheia.count() << " segundos" << std::endl;
     }
 
-    // Heurística 2: Seleção Aleatória Baseada em Probabilidade
-    std::cout << "\nHeurística 2: Seleção Aleatória Baseada em Probabilidade" << std::endl;
+    // Algoritmo: Substituição de Objeto
+    std::cout << "\nAlgoritmo: Substituição de Objeto" << std::endl;
     for (int i = 0; i < 5; ++i) {
-        double peso_total_heuristica2 = 0;
-        std::vector<int> itens_selecionados_heuristica2;
-        auto start_heuristica2 = std::chrono::high_resolution_clock::now();
-        double max_value_heuristica2 = heuristic_random_selection(W, items, peso_total_heuristica2, itens_selecionados_heuristica2, 0.5);
-        auto end_heuristica2 = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> duration_heuristica2 = end_heuristica2 - start_heuristica2;
+        double peso_total_substituicao = 0;
+        std::vector<int> itens_selecionados_substituicao;
+        auto start_substituicao = std::chrono::high_resolution_clock::now();
+        double max_value_substituicao = substituicao_objeto(W, items, peso_total_substituicao, itens_selecionados_substituicao);
+        auto end_substituicao = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> duration_substituicao = end_substituicao - start_substituicao;
 
-        std::cout << "Execução " << i + 1 << ": Valor máximo: " << max_value_heuristica2
-                  << ", Peso total: " << peso_total_heuristica2 << ", Tempo de execução: " << duration_heuristica2.count() << " segundos" << std::endl;
+        std::cout << "Execução " << i + 1 << ": Valor máximo: " << max_value_substituicao
+                  << ", Peso total: " << peso_total_substituicao << ", Tempo de execução: " << duration_substituicao.count() << " segundos" << std::endl;
+    }
+
+    // Algoritmo: Hill Climbing
+    std::cout << "\nAlgoritmo: Hill Climbing" << std::endl;
+    for (int i = 0; i < 5; ++i) {
+        double peso_total_hill = 0;
+        std::vector<int> itens_selecionados_hill;
+        auto start_hill = std::chrono::high_resolution_clock::now();
+        double max_value_hill = hill_climbing(W, items, peso_total_hill, itens_selecionados_hill);
+        auto end_hill = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> duration_hill = end_hill - start_hill;
+
+        std::cout << "Execução " << i + 1 << ": Valor máximo: " << max_value_hill
+                  << ", Peso total: " << peso_total_hill << ", Tempo de execução: " << duration_hill.count() << " segundos" << std::endl;
     }
 
     return 0;
