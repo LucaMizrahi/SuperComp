@@ -96,30 +96,21 @@ double heuristic_random_selection(double W, const std::vector<item>& items, doub
 double mochila_cheia(double W, const std::vector<item>& items, double& peso_total, std::vector<int>& itens_selecionados) {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, items.size() - 1);
+
+    // Faz uma cópia local dos itens para poder embaralhá-los sem modificar o original
+    std::vector<item> items_copy = items;
+    std::shuffle(items_copy.begin(), items_copy.end(), gen);
 
     double valor_total = 0;
     peso_total = 0;
     itens_selecionados.clear();
-    std::vector<bool> usados(items.size(), false);
-    
-    // Passo 1: gerar solução aleatória
-    for (size_t i = 0; i < items.size(); ++i) {
-        if (peso_total + items[i].peso <= W) {
-            peso_total += items[i].peso;
-            valor_total += items[i].valor;
-            itens_selecionados.push_back(items[i].id);
-            usados[i] = true;
-        }
-    }
 
-    // Passo 2: percorrer novamente todos os objetos
-    for (size_t i = 0; i < items.size(); ++i) {
-        if (!usados[i] && peso_total + items[i].peso <= W) {
-            peso_total += items[i].peso;
-            valor_total += items[i].valor;
-            itens_selecionados.push_back(items[i].id);
-            usados[i] = true;
+    // Preenche a mochila até o limite de capacidade
+    for (size_t i = 0; i < items_copy.size(); ++i) {
+        if (peso_total + items_copy[i].peso <= W) {
+            peso_total += items_copy[i].peso;
+            valor_total += items_copy[i].valor;
+            itens_selecionados.push_back(items_copy[i].id);  // Adiciona o ID do item selecionado
         }
     }
 
@@ -128,30 +119,48 @@ double mochila_cheia(double W, const std::vector<item>& items, double& peso_tota
 
 // Algoritmo de Busca Local: Substituição de Objeto
 double substituicao_objeto(double W, const std::vector<item>& items, double& peso_total, std::vector<int>& itens_selecionados) {
-    // Inicializa a solução aleatória
+    // Inicializa a solução aleatória usando o algoritmo de "mochila cheia"
     double valor_total = mochila_cheia(W, items, peso_total, itens_selecionados);
 
     bool melhorou;
+
     do {
         melhorou = false;
+
+        // Tenta substituir cada item dentro da mochila por um item fora dela
         for (size_t i = 0; i < items.size(); ++i) {
-            if (std::find(itens_selecionados.begin(), itens_selecionados.end(), items[i].id) != itens_selecionados.end()) continue;  // Pula os itens já usados
+            // Verifica se o item já está na mochila
+            if (std::find(itens_selecionados.begin(), itens_selecionados.end(), items[i].id) != itens_selecionados.end()) {
+                continue;  // Pula os itens que já estão na mochila
+            }
 
+            // Itera sobre os itens já selecionados na mochila para tentar substituir
             for (size_t j = 0; j < itens_selecionados.size(); ++j) {
-                double peso_novo = peso_total - items[itens_selecionados[j] - 1].peso + items[i].peso;
-                double valor_novo = valor_total - items[itens_selecionados[j] - 1].valor + items[i].valor;
+                int id_item_mochila = itens_selecionados[j];  // Obtenha o ID do item na mochila
 
+                // Calcula o novo peso e valor se trocarmos o item na mochila pelo item fora da mochila
+                double peso_novo = peso_total - items[id_item_mochila - 1].peso + items[i].peso;
+                double valor_novo = valor_total - items[id_item_mochila - 1].valor + items[i].valor;
+
+                // Faz a substituição se o novo peso for válido e o valor for melhor
                 if (peso_novo <= W && valor_novo > valor_total) {
+                    // Atualiza a solução com a troca
                     peso_total = peso_novo;
                     valor_total = valor_novo;
-                    itens_selecionados[j] = items[i].id;  // Troca o item
+                    itens_selecionados[j] = items[i].id;  // Substitui o item na mochila pelo novo
+
+                    // Marca que houve uma melhoria e reinicia a busca
                     melhorou = true;
                     break;
                 }
             }
-            if (melhorou) break;  // Reinicia a busca se houve melhoria
+
+            if (melhorou) {
+                // Se houve melhoria, reinicia a busca para avaliar novas trocas
+                break;
+            }
         }
-    } while (melhorou);
+    } while (melhorou);  // Continua enquanto houver melhorias reais
 
     return valor_total;
 }
@@ -201,7 +210,7 @@ double hill_climbing(double W, const std::vector<item>& items, double& peso_tota
 }
 
 int main() {
-    std::ifstream inputFile("entrada4.txt");
+    std::ifstream inputFile("entrada2.txt");
     if (!inputFile.is_open()) {
         std::cerr << "Erro ao abrir o arquivo de entrada!" << std::endl;
         return 1;
@@ -247,7 +256,7 @@ int main() {
                   << ", Peso total: " << peso_total_substituicao << ", Tempo de execução: " << duration_substituicao.count() << " segundos" << std::endl;
     }
 
-    // Algoritmo: Hill Climbing
+    // // Algoritmo: Hill Climbing
     std::cout << "\nAlgoritmo: Hill Climbing" << std::endl;
     for (int i = 0; i < 5; ++i) {
         double peso_total_hill = 0;
