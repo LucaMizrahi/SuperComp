@@ -1,0 +1,11 @@
+Heurística: Mais Caro Primeiro
+Valor total dos itens na mochila: 50
+Peso total dos itens na mochila: 10
+Itens selecionados: 1
+Tempo de execução: (tempo de execução)
+
+Heurística: Mais Leve Primeiro
+Valor total dos itens na mochila: 135
+Peso total dos itens na mochila: 9
+Itens selecionados: 2 3 4 5 6 7 8 9 10
+Tempo de execução: (tempo de execução)
