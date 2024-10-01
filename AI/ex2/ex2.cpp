@@ -4,7 +4,6 @@
 #include <cstdlib> // para gerar números aleatórios
 #include <ctime>   // para inicializar a seed do rand
 
-// Função recursiva que verifica se existe um subconjunto cuja soma seja igual a 'sum'
 bool subsetSumRecursive(const std::vector<int>& set, int n, int sum) {
     // Caso base: se a soma for 0, o subconjunto é encontrado
     if (sum == 0) return true;
@@ -16,13 +15,10 @@ bool subsetSumRecursive(const std::vector<int>& set, int n, int sum) {
     if (set[n-1] > sum) return subsetSumRecursive(set, n-1, sum);
 
     // Verificar se a soma pode ser encontrada
-    // (1) incluindo o último elemento ou
-    // (2) não incluindo o último elemento
     return subsetSumRecursive(set, n-1, sum) || subsetSumRecursive(set, n-1, sum - set[n-1]);
 }
 
 int main() {
-    // Inicializa a seed do gerador de números aleatórios
     std::srand(std::time(0));
 
     // Definindo 10 tamanhos para os conjuntos de teste, com tamanhos maiores para entradas médias e grandes
