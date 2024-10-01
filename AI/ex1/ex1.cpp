@@ -84,7 +84,7 @@ int main() {
     bool result4 = subsetSum(set4, target4);
     auto end4 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed4 = end4 - start4;
-    std::cout << "Teste 6 (n = 5000): " << (result4 ? "true" : "false") << " - Tempo: " << elapsed4.count() << " segundos" << std::endl;
+    std::cout << "Teste 4 (n = 1000): " << (result4 ? "true" : "false") << " - Tempo: " << elapsed4.count() << " segundos" << std::endl;
 
     // Teste 5 com n = 10000
     auto start5 = std::chrono::high_resolution_clock::now();
