@@ -1,70 +1,65 @@
 #include <iostream>
 #include <vector>
-#include <algorithm> // para sort
-#include <chrono> // para contagem de tempo
-#include <cstdlib> // para rand() e srand()
-#include <ctime>   // para time()
+#include <chrono> // para medir o tempo
+#include <cstdlib> // para gerar números aleatórios
+#include <ctime>   // para inicializar a seed do rand
 
-// Função que implementa a heurística para o problema do subconjunto de soma
-bool subsetSumHeuristic(const std::vector<int>& set, int sum) {
-    std::vector<int> sortedSet = set;
-
-    // Passo 1: Ordenar o conjunto em ordem decrescente
-    std::sort(sortedSet.begin(), sortedSet.end(), std::greater<int>());
-
-    int currentSum = 0;
+// Função recursiva que verifica se existe um subconjunto cuja soma seja igual a 'sum'
+bool subsetSumRecursive(const std::vector<int>& set, int n, int sum) {
+    // Caso base: se a soma for 0, o subconjunto é encontrado
+    if (sum == 0) return true;
     
-    // Passo 2: Iterar sobre os elementos e decidir se inclui no subconjunto
-    for (int num : sortedSet) {
-        if (currentSum + num <= sum) {
-            currentSum += num;
-        }
+    // Caso base: se não há mais elementos e a soma não foi encontrada
+    if (n == 0 && sum != 0) return false;
 
-        // Passo 3: Verificar se a soma já atingiu o valor alvo
-        if (currentSum == sum) {
-            return true;
-        }
-    }
+    // Se o último elemento for maior que a soma, ignorá-lo
+    if (set[n-1] > sum) return subsetSumRecursive(set, n-1, sum);
 
-    // Se não for possível alcançar a soma alvo, retorne falso
-    return false;
-}
-
-// Função para gerar conjuntos aleatórios
-std::vector<int> generateRandomSet(int n, int maxVal) {
-    std::vector<int> set(n);
-    for (int i = 0; i < n; ++i) {
-        set[i] = rand() % maxVal + 1;  // Números aleatórios entre 1 e maxVal
-    }
-    return set;
+    // Verificar se a soma pode ser encontrada
+    // (1) incluindo o último elemento ou
+    // (2) não incluindo o último elemento
+    return subsetSumRecursive(set, n-1, sum) || subsetSumRecursive(set, n-1, sum - set[n-1]);
 }
 
 int main() {
-    // Inicializar a semente do gerador de números aleatórios
-    srand(static_cast<unsigned int>(time(0)));
+    // Inicializa a seed do gerador de números aleatórios
+    std::srand(std::time(0));
 
-    // Definir tamanhos dos conjuntos e os valores alvo
-    std::vector<int> setSizes = {10, 20, 30, 40, 50, 100, 200, 500, 1000, 10000};
-    std::vector<int> targets = {50, 100, 150, 200, 300, 500, 800, 1000, 1500, 10000};
+    // Definindo 10 tamanhos para os conjuntos de teste, com tamanhos maiores para entradas médias e grandes
+    std::vector<int> setSizes = {6, 6, 50, 100, 500, 1000, 5000, 10000, 20000, 30000};
 
-    // Executando os testes com conjuntos aleatórios
+    // Definindo os alvos para cada conjunto aleatório
+    std::vector<int> targets = {9, 11, 500, 1000, 300, 500, 1000, 1000, 1000, 1000};
+
+    // Gerar 10 conjuntos aleatórios e medir o tempo de execução da solução ótima
     for (int i = 0; i < setSizes.size(); ++i) {
-        // Gerar o conjunto aleatório com o tamanho especificado
-        std::vector<int> randomSet = generateRandomSet(setSizes[i], 100);  // maxVal = 100 para variabilidade
+        // Gerar um conjunto aleatório de tamanho setSizes[i]
+        std::vector<int> testSet(setSizes[i]);
+        for (int j = 0; j < setSizes[i]; ++j) {
+            testSet[j] = std::rand() % 100 + 1; // Números aleatórios entre 1 e 100
+        }
 
-        // Obter o valor alvo correspondente
-        int target = targets[i];
+        // Exibir o conjunto gerado para referência (limitar a exibição para conjuntos menores)
+        if (setSizes[i] <= 50) {
+            std::cout << "Conjunto " << (i + 1) << ": ";
+            for (int num : testSet) {
+                std::cout << num << " ";
+            }
+            std::cout << " - Alvo: " << targets[i] << std::endl;
+        } else {
+            std::cout << "Conjunto " << (i + 1) << " (Tamanho: " << setSizes[i] << ") - Alvo: " << targets[i] << std::endl;
+        }
 
-        // Medir o tempo de execução da heurística
+        // Medir o tempo de execução da solução ótima
         auto start = std::chrono::high_resolution_clock::now();
-        bool result = subsetSumHeuristic(randomSet, target);
+        bool result = subsetSumRecursive(testSet, testSet.size(), targets[i]);
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> elapsed = end - start;
 
-        // Imprimir o resultado
-        std::cout << "Teste " << (i + 1) << " (Tamanho do conjunto: " << setSizes[i] 
-                  << ", Alvo: " << target << "): "
-                  << (result ? "true" : "false") << " - Tempo: " << elapsed.count() << " segundos" << std::endl;
+        // Exibir o resultado e o tempo de execução
+        std::cout << "Resultado: " << (result ? "true" : "false") 
+                  << " - Tempo: " << elapsed.count() << " segundos" << std::endl;
+        std::cout << "---------------------------------------------------------" << std::endl;
     }
 
     return 0;
