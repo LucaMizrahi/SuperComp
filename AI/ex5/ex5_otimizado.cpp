@@ -17,7 +17,7 @@ int fibMemo(int n, std::vector<int>& memo) {
 }
 
 int fib(int n) {
-    std::vector<int> memo(n + 1, -1); // Inicializamos o vetor de memorização com -1
+    std::vector<int> memo(n + 1, -1);
     return fibMemo(n, memo);
 }
 
