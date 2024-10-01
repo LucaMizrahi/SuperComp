@@ -39,14 +39,14 @@ int main() {
     std::vector<int> set3 = {10, 20, 30};
     int target3 = 25;
 
-    // Cenário 4: Grande conjunto
+    // Cenário 4: n = 1000
     std::vector<int> set4;
     int target4 = 5000;
     for (int i = 1; i <= 1000; ++i) {
         set4.push_back(i);
     }
 
-    // Cenário 5: Outro grande conjunto com maiores valores
+    // Cenário 5: n = 10000
     std::vector<int> set5;
     int target5 = 200000;
     for (int i = 1; i <= 10000; ++i) {
