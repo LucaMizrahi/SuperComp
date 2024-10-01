@@ -26,7 +26,7 @@ int main() {
     std::cout << "Digite o valor de N para calcular Fibonacci: ";
     std::cin >> n;
 
-    // Medir o tempo de execução da função otimizada (com memorização)
+    // Medir o tempo de execução da função otimizada
     auto start = std::chrono::high_resolution_clock::now();
     int result = fib(n);
     auto end = std::chrono::high_resolution_clock::now();
