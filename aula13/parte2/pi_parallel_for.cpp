@@ -3,7 +3,7 @@
 #include <iomanip>
 
 static long num_steps = 1024l * 1024 * 1024 * 2;  // Número de passos
-#define MIN_BLK 1024 * 1024 * 256  // Modifique este valor para testar diferentes granularidades
+#define MIN_BLK 1024 * 1024 * 64  // Modifique este valor para testar diferentes granularidades
 
 double sum = 0;
 
