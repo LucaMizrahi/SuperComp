@@ -8,7 +8,7 @@ double conta_complexa(int i) {
 }
 
 int main() {
-    int N = 10000;  // Tamanho do vetor
+    int N = 1000000;  // Tamanho do vetor
     std::vector<double> vec(N);  // Pré-aloca a memória para o vetor
 
     for (int exec = 0; exec < 3; exec++) {  // Executar 3 vezes
