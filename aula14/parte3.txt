@@ -1,0 +1,2 @@
+Estimativa de Pi (melhorado): 3.14824
+Tempo de execução (melhorado): 0.233462 segundos
