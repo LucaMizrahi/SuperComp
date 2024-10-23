@@ -1,16 +1,16 @@
 Saída ex1:
-Processo 0 enviou: Olá
-Processo 0 recebeu: Oi
 Processo 1 recebeu: Olá
 Processo 1 enviou: Oi
+Processo 0 enviou: Olá
+Processo 0 recebeu: Oi
  
 Saída ex2: (4 processos)
-Processo 2 enviou mensagem para processo 3
-Processo 2 recebeu mensagem de processo 1
-Processo 3 enviou mensagem para processo 0
-Processo 3 recebeu mensagem de processo 2
 Processo 1 enviou mensagem para processo 2
 Processo 1 recebeu mensagem de processo 0
+Processo 3 enviou mensagem para processo 0
+Processo 3 recebeu mensagem de processo 2
+Processo 2 enviou mensagem para processo 3
+Processo 2 recebeu mensagem de processo 1
 Processo 0 enviou mensagem para processo 1
 Processo 0 recebeu mensagem de processo 3
  
@@ -20,7 +20,7 @@ Erro: O número de processos deve ser maior que 2!
 prterun detected that one or more processes exited with non-zero status,
 thus causing the job to be terminated. The first process to do so was:
 
-   Process name: [prterun-compute00-632256@1,0] Exit code:    1
+   Process name: [prterun-compute00-632762@1,0] Exit code:    1
 --------------------------------------------------------------------------
  
 Saída ex3: (4 processos)
@@ -36,3 +36,25 @@ Processo 0 enviou: Mensagem para o processo 3 para o processo 3
 Processo 1 recebeu: Mensagem para o processo 1
 Processo 2 recebeu: Mensagem para o processo 2
 Processo 3 recebeu: Mensagem para o processo 3
+ 
+Saída ex5: (4 processos)
+Processo 0 inicia com valor: 1
+Processo 1 somou seu valor: 2 para total: 3
+Processo 2 somou seu valor: 3 para total: 6
+Processo 3 somou seu valor: 4 para total: 10
+Processo 3 exibe a soma total: 10
+ 
+Saída ex6: (4 processos)
+Processo 0 enviou a mensagem 1 para o processo 1
+Processo 0 recebeu a resposta 1 do processo 1
+Processo 0 enviou a mensagem 2 para o processo 2
+Processo 0 recebeu a resposta 2 do processo 2
+Processo 0 enviou a mensagem 3 para o processo 3
+Processo 0 recebeu a resposta 3 do processo 3
+Processo 1 recebeu a mensagem 1 do processo 0
+Processo 1 enviou a resposta 1 para o processo 0
+Processo 2 recebeu a mensagem 2 do processo 0
+Processo 2 enviou a resposta 2 para o processo 0
+Processo 3 recebeu a mensagem 3 do processo 0
+Processo 3 enviou a resposta 3 para o processo 0
+ 

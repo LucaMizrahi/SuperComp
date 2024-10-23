@@ -25,4 +25,12 @@ echo " "
 
 echo "Saída ex4: (4 processos)"
 mpirun -np 4 ./ex4
+echo " "
 
+echo "Saída ex5: (4 processos)"
+mpirun -np 4 ./ex5
+echo " "
+
+echo "Saída ex6: (4 processos)"
+mpirun -np 4 ./ex6
+echo " "
