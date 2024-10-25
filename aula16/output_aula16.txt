@@ -1,0 +1,17 @@
+Saída ex1:
+A média global do array é: 49.69
+ 
+Saída ex2:
+Processo raiz definiu o número de iterações como 5000
+Processo 0 finalizou o cálculo com resultado: 716.817
+Processo 3 finalizou o cálculo com resultado: 716.817
+Processo 1 finalizou o cálculo com resultado: 716.817
+Processo 2 finalizou o cálculo com resultado: 716.817
+ 
+Saída ex3:
+Processo raiz encontrou o valor máximo: 100
+Array normalizado: 0.37 0.14 0.15 0.78 0.69 0.95 0.69 0.8 0.6 0.36 0.31 0.32 0.5 0.08 0.61 0.66 0.18 0.06 0.2 0.99 0.19 0.28 0.32 0.57 0.19 0.39 0.9 0.57 0.15 0.97 0.22 0.03 0.62 0.36 0.8 0.31 0.3 0.01 0.1 0.41 0.36 0.93 0.72 0.37 1 0.84 0.03 0.69 0.41 0.74 0.67 0.11 0.53 0.5 0.19 0.23 0.89 0.08 0.8 0.55 0.57 0.53 0.58 0.18 0.88 0.37 0.48 0.69 0.89 0.1 0.09 0.25 0.02 0.32 0.61 0.53 0.67 0.15 0.22 0.59 0.4 0.4 0.69 0.44 0.9 0.87 0.67 0.78 0.47 0.98 0.32 0.03 0.5 0.89 0.72 0.89 0.78 0.72 0.09 0.66 
+ 
+Saída ex4:
+Desvio padrão global do array é: 27.7328
+ 
