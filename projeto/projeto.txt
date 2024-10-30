@@ -1,1 +1,2 @@
 Abordagem Exaustiva:
+slurmstepd-compute00: error: *** JOB 6611 ON compute00 CANCELLED AT 2024-10-30T14:32:36 ***
