@@ -1,10 +1,10 @@
 Abordagem Exaustiva:
 Tamanho da clique máxima: 4
 Vértices da clique máxima: 12 13 14 15 
-Tempo de execução: 8.65e-06 segundos
+Tempo de execução: 9.809e-06 segundos
  
 Abordagem com OpenMP:
 Tamanho da clique máxima: 4
 Vértices da clique máxima: 12 13 14 15 
-Tempo de execução: 3.8029e-05 segundos
+Tempo de execução: 4.2388e-05 segundos
  
