@@ -66,7 +66,7 @@ void EncontrarCliqueMaximaOpenMP(const std::vector<std::vector<int>>& grafo, int
 
 int main() {
     int numVertices;
-    std::string nomeArquivo = "grafo50.txt";
+    std::string nomeArquivo = "grafo200.txt";
     
     std::vector<std::vector<int>> grafo = LerGrafo(nomeArquivo, numVertices);
 
