@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
+#include <chrono>
 
 // Função para ler o grafo a partir do arquivo de entrada
 std::vector<std::vector<int>> LerGrafo(const std::string& nomeArquivo, int& numVertices) {
@@ -75,7 +76,7 @@ void EncontrarCliqueMaxima(const std::vector<std::vector<int>>& grafo, int numVe
 
 int main() {
     int numVertices;
-    std::string nomeArquivo = "grafo.txt";
+    std::string nomeArquivo = "grafo20.txt";
     
     // Lê o grafo do arquivo e armazena como matriz de adjacência
     std::vector<std::vector<int>> grafo = LerGrafo(nomeArquivo, numVertices);
@@ -86,6 +87,12 @@ int main() {
     // Encontra a clique máxima
     EncontrarCliqueMaxima(grafo, numVertices, cliqueMaxima);
 
+    // Início da medição de tempo
+    auto start = std::chrono::high_resolution_clock::now();
+    EncontrarCliqueMaxima(grafo, numVertices, cliqueMaxima);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> duration = end - start;
+
     // Exibe o resultado
     std::cout << "Tamanho da clique máxima: " << cliqueMaxima.size() << std::endl;
     std::cout << "Vértices da clique máxima: ";
@@ -93,6 +100,7 @@ int main() {
         std::cout << (v + 1) << " "; // Exibindo os vértices na notação 1-baseada
     }
     std::cout << std::endl;
+    std::cout << "Tempo de execução: " << duration.count() << " segundos" << std::endl;
 
     return 0;
 }

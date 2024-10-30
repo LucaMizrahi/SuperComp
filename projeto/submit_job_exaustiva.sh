@@ -7,5 +7,10 @@
 #SBATCH --time=02:00:00
 #SBATCH --partition=espec
 
-echo "Tarefa 1:"
+echo "Abordagem Exaustiva:"
 ./exaustiva
+echo " "
+
+echo "Abordagem com OpenMP:"
+./openmp
+echo " "

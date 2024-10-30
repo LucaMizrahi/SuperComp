@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <omp.h>
 #include <functional>
+#include <chrono>
 
 std::vector<std::vector<int>> LerGrafo(const std::string& nomeArquivo, int& numVertices) {
     std::ifstream arquivo(nomeArquivo);
@@ -65,29 +66,26 @@ void EncontrarCliqueMaximaOpenMP(const std::vector<std::vector<int>>& grafo, int
 
 int main() {
     int numVertices;
-    std::string nomeArquivo = "grafo.txt";
+    std::string nomeArquivo = "grafo20.txt";
     
     std::vector<std::vector<int>> grafo = LerGrafo(nomeArquivo, numVertices);
 
     std::vector<int> cliqueMaxima;
 
-    double start = omp_get_wtime();
+    // Início da medição de tempo
+    auto start = std::chrono::high_resolution_clock::now();
     EncontrarCliqueMaximaOpenMP(grafo, numVertices, cliqueMaxima);
-    double end = omp_get_wtime();
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> duration = end - start;
 
-    std::ofstream saida("resultado_openmp.txt");
-    if (saida.is_open()) {
-        saida << "Tamanho da clique máxima: " << cliqueMaxima.size() << std::endl;
-        saida << "Vértices da clique máxima: ";
-        for (int v : cliqueMaxima) {
-            saida << (v + 1) << " ";
-        }
-        saida << std::endl;
-        saida << "Tempo de execução: " << end - start << " segundos" << std::endl;
-        saida.close();
-    } else {
-        std::cerr << "Erro ao abrir o arquivo de saída." << std::endl;
+    // Exibe o resultado no console
+    std::cout << "Tamanho da clique máxima: " << cliqueMaxima.size() << std::endl;
+    std::cout << "Vértices da clique máxima: ";
+    for (int v : cliqueMaxima) {
+        std::cout << (v + 1) << " ";
     }
+    std::cout << std::endl;
+    std::cout << "Tempo de execução: " << duration.count() << " segundos" << std::endl;
 
     return 0;
 }

@@ -1,2 +1,10 @@
-Tarefa 1:
-slurmstepd-compute00: error: *** JOB 6578 ON compute00 CANCELLED AT 2024-10-30T13:53:57 ***
+Abordagem Exaustiva:
+Tamanho da clique máxima: 4
+Vértices da clique máxima: 12 13 14 15 
+Tempo de execução: 8.65e-06 segundos
+ 
+Abordagem com OpenMP:
+Tamanho da clique máxima: 4
+Vértices da clique máxima: 12 13 14 15 
+Tempo de execução: 3.8029e-05 segundos
+ 
