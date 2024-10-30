@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <omp.h>
+#include <functional>
 
 std::vector<std::vector<int>> LerGrafo(const std::string& nomeArquivo, int& numVertices) {
     std::ifstream arquivo(nomeArquivo);
