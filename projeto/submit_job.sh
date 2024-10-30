@@ -5,6 +5,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=4096
 #SBATCH --time=02:00:00
+#SBATCH --partition=espec
 
 echo "Tarefa 1:"
 ./exaustiva
