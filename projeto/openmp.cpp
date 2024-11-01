@@ -30,43 +30,63 @@ void EncontrarCliqueMaximaOpenMP(const std::vector<std::vector<int>>& grafo, int
         candidatos[i] = i;
     }
 
-    std::vector<int> cliqueAtual;
+    // Define cliqueMaxima como thread-safe com OpenMP
+    #pragma omp parallel
+    {
+        std::vector<int> cliqueMaximaLocal;  // Clique máxima local para cada thread
+        std::vector<int> cliqueAtual;        // Clique atual de cada thread
 
-    // Função lambda recursiva com paralelização OpenMP
-    std::function<void(std::vector<int>&, std::vector<int>&)> EncontrarCliques;
-    EncontrarCliques = [&](std::vector<int>& cliqueAtual, std::vector<int>& candidatos) {
-        #pragma omp parallel for schedule(dynamic)
+        // Usa std::function para permitir chamada recursiva da lambda
+        std::function<void(std::vector<int>&, std::vector<int>&)> EncontrarCliques;
+        EncontrarCliques = [&](std::vector<int>& cliqueAtual, std::vector<int>& candidatos) {
+            for (size_t i = 0; i < candidatos.size(); ++i) {
+                int v = candidatos[i];
+                std::vector<int> novosCandidatos;
+                for (size_t j = i + 1; j < candidatos.size(); ++j) {
+                    int u = candidatos[j];
+                    if (grafo[v][u]) {
+                        novosCandidatos.push_back(u);
+                    }
+                }
+
+                cliqueAtual.push_back(v);
+
+                if (cliqueAtual.size() > cliqueMaximaLocal.size()) {
+                    cliqueMaximaLocal = cliqueAtual;
+                }
+
+                if (!novosCandidatos.empty()) {
+                    EncontrarCliques(cliqueAtual, novosCandidatos);
+                }
+
+                cliqueAtual.pop_back();
+            }
+        };
+
+        #pragma omp for schedule(dynamic)
         for (size_t i = 0; i < candidatos.size(); ++i) {
-            int v = candidatos[i];
+            cliqueAtual.clear();
+            cliqueAtual.push_back(candidatos[i]);
             std::vector<int> novosCandidatos;
             for (size_t j = i + 1; j < candidatos.size(); ++j) {
-                int u = candidatos[j];
-                if (grafo[v][u]) {
-                    novosCandidatos.push_back(u);
+                if (grafo[candidatos[i]][candidatos[j]]) {
+                    novosCandidatos.push_back(candidatos[j]);
                 }
             }
-
-            cliqueAtual.push_back(v);
-
-            #pragma omp critical
-            if (cliqueAtual.size() > cliqueMaxima.size()) {
-                cliqueMaxima = cliqueAtual;
-            }
-
-            if (!novosCandidatos.empty()) {
-                EncontrarCliques(cliqueAtual, novosCandidatos);
-            }
-
-            cliqueAtual.pop_back();
+            EncontrarCliques(cliqueAtual, novosCandidatos);
         }
-    };
 
-    EncontrarCliques(cliqueAtual, candidatos);
+        // Atualiza a cliqueMaxima global com a clique máxima local de cada thread
+        #pragma omp critical
+        if (cliqueMaximaLocal.size() > cliqueMaxima.size()) {
+            cliqueMaxima = cliqueMaximaLocal;
+        }
+    }
 }
 
 int main() {
     int numVertices;
-    std::string nomeArquivo = "grafos/grafo75.txt";
+    std::string nomeArquivo = "grafos/grafo50.txt";
     
     std::vector<std::vector<int>> grafo = LerGrafo(nomeArquivo, numVertices);
 

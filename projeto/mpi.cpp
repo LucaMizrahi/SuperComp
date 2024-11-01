@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
     MPI_Comm_size(MPI_COMM_WORLD, &size);  // Pega o número total de processos
 
     int numVertices;
-    std::string nomeArquivo = "grafo.txt";
+    std::string nomeArquivo = "grafos/grafo50.txt";
 
     std::vector<std::vector<int>> grafo;
     if (rank == 0) {

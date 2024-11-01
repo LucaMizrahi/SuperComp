@@ -1,2 +1,5 @@
 Abordagem Exaustiva:
-slurmstepd-compute00: error: *** JOB 6611 ON compute00 CANCELLED AT 2024-10-30T14:32:36 ***
+Tamanho da clique máxima: 11
+Vértices da clique máxima: 1 2 3 9 14 15 19 20 24 38 40 
+Tempo de execução: 0.0216294 segundos
+ 
