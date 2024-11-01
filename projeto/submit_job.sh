@@ -10,3 +10,11 @@
 echo "Abordagem Exaustiva:"
 ./exaustiva
 echo " "
+
+echo "Abordagem com OpenMP:"
+./openmp
+echo " "
+
+echo "Abordagem com MPI:"
+mpirun -np 4 mpi
+echo " "
