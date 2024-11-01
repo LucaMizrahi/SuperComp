@@ -1,15 +1,15 @@
 Abordagem Exaustiva:
-Tamanho da clique máxima: 14
-Vértices da clique máxima: 1 11 15 16 18 37 38 45 47 52 68 88 98 99 
-Tempo de execução: 1.67891 segundos
+Tamanho da clique máxima: 17
+Vértices da clique máxima: 2 7 9 13 62 71 80 90 109 111 116 122 148 161 163 166 170 
+Tempo de execução: 357.038 segundos
  
 Abordagem com OpenMP:
-Tamanho da clique máxima: 14
-Vértices da clique máxima: 1 11 15 16 18 37 38 45 47 52 68 88 98 99 
-Tempo de execução: 0.460711 segundos
+Tamanho da clique máxima: 17
+Vértices da clique máxima: 8 10 14 18 36 37 44 55 59 68 89 96 102 106 147 158 175 
+Tempo de execução: 128.266 segundos
  
 Abordagem com MPI:
-Tamanho da clique máxima: 14
-Vértices da clique máxima: 1 11 15 16 18 37 38 45 47 52 68 88 98 99 
-Tempo de execução: 0.465444 segundos
+Tamanho da clique máxima: 15
+Vértices da clique máxima: 1 2 3 4 12 13 23 24 36 45 68 119 127 154 163 
+Tempo de execução: 109.675 segundos
  

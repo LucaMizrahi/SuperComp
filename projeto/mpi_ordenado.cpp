@@ -24,7 +24,27 @@ std::vector<std::vector<int>> LerGrafo(const std::string& nomeArquivo, int& numV
     return grafo;
 }
 
-// Função para encontrar a clique máxima localmente em um intervalo de vértices
+// Função para ordenar os vértices por grau de conexão
+std::vector<int> ObterVerticesOrdenadosPorGrau(const std::vector<std::vector<int>>& grafo) {
+    int numVertices = grafo.size();
+    std::vector<std::pair<int, int>> graus; // {grau, vértice}
+
+    for (int i = 0; i < numVertices; ++i) {
+        int grau = std::count(grafo[i].begin(), grafo[i].end(), 1);
+        graus.emplace_back(grau, i);
+    }
+
+    // Ordena em ordem decrescente de grau
+    std::sort(graus.rbegin(), graus.rend());
+    
+    std::vector<int> verticesOrdenados;
+    for (const auto& par : graus) {
+        verticesOrdenados.push_back(par.second);
+    }
+    return verticesOrdenados;
+}
+
+// Função para encontrar a clique máxima localmente com heurísticas de ordenação
 void EncontrarCliqueLocal(const std::vector<std::vector<int>>& grafo, std::vector<int>& cliqueMaxima, int numVertices, int rank, int size) {
     std::vector<int> cliqueAtual;
 
@@ -47,7 +67,7 @@ void EncontrarCliqueLocal(const std::vector<std::vector<int>>& grafo, std::vecto
                 cliqueMaxima = cliqueAtual;
             }
 
-            // Limita a profundidade da recursão para otimização
+            // Limita a profundidade e aplica poda de subárvores ineficientes
             if (!novosCandidatos.empty() && cliqueAtual.size() < 15) {
                 EncontrarCliques(cliqueAtual, novosCandidatos);
             }
@@ -56,13 +76,14 @@ void EncontrarCliqueLocal(const std::vector<std::vector<int>>& grafo, std::vecto
         }
     };
 
-    for (int i = rank; i < numVertices; i += size) {
+    std::vector<int> verticesOrdenados = ObterVerticesOrdenadosPorGrau(grafo);
+    for (int i = rank; i < verticesOrdenados.size(); i += size) {
         cliqueAtual.clear();
-        cliqueAtual.push_back(i);
+        cliqueAtual.push_back(verticesOrdenados[i]);
         std::vector<int> candidatos;
-        for (int j = i + 1; j < numVertices; ++j) {
-            if (grafo[i][j]) {
-                candidatos.push_back(j);
+        for (int j = i + 1; j < verticesOrdenados.size(); ++j) {
+            if (grafo[verticesOrdenados[i]][verticesOrdenados[j]]) {
+                candidatos.push_back(verticesOrdenados[j]);
             }
         }
         EncontrarCliques(cliqueAtual, candidatos);
@@ -77,7 +98,7 @@ int main(int argc, char* argv[]) {
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
     int numVertices;
-    std::string nomeArquivo = "grafos/grafo175.txt";
+    std::string nomeArquivo = "grafos/grafo150.txt";
     std::vector<std::vector<int>> grafo;
 
     if (rank == 0) {

@@ -1,5 +1,2 @@
 Abordagem com MPI:
-Tamanho da clique máxima: 14
-Vértices da clique máxima: 1 11 15 16 18 37 38 45 47 52 68 88 98 99 
-Tempo de execução: 0.465604 segundos
- 
+slurmstepd-compute00: error: *** JOB 6820 ON compute00 CANCELLED AT 2024-11-01T09:14:05 ***
