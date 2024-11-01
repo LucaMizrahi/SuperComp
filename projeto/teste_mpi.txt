@@ -1,0 +1,5 @@
+Abordagem com MPI:
+Tamanho da clique máxima: 6
+Vértices da clique máxima: 13 14 15 19 20 1 
+Tempo de execução: 2.034e-05 segundos
+ 

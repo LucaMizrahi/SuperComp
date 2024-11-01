@@ -10,7 +10,3 @@
 echo "Abordagem com OpenMP:"
 ./openmp
 echo " "
-
-echo "Abordagem com OpenMP (2):"
-./openmp2
-echo " "
