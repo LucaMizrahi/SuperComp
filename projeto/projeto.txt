@@ -1,5 +1,5 @@
 Abordagem Exaustiva:
 Tamanho da clique máxima: 11
 Vértices da clique máxima: 1 2 3 9 14 15 19 20 24 38 40 
-Tempo de execução: 0.0216427 segundos
+Tempo de execução: 0.0179298 segundos
  
