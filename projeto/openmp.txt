@@ -1,0 +1,5 @@
+Abordagem com OpenMP:
+Tamanho da clique máxima: 18
+Vértices da clique máxima: 3 7 16 22 59 64 66 68 93 110 116 117 119 128 131 136 138 146 
+Tempo de execução: 17.5914 segundos
+ 
