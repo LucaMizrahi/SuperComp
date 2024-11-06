@@ -16,5 +16,5 @@ echo "Abordagem com OpenMP:"
 echo " "
 
 echo "Abordagem com MPI:"
-mpirun -np 4 mpi
+mpirun -np 4 ./mpi
 echo " "

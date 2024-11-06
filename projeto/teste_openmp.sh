@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=teste_projeto        # Nome do job
-#SBATCH --output=teste_openmp.txt          # Nome do arquivo de saída
+#SBATCH --job-name=projeto        # Nome do job
+#SBATCH --output=projeto.txt          # Nome do arquivo de saída
 #SBATCH --ntasks=4
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=4096
