@@ -1,0 +1,2 @@
+Sequência de aminoácidos para chr11:
+4 7 3 

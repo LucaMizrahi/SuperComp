@@ -1,0 +1,24 @@
+Contagem de proteínas inicializadas em cada arquivo de RNA:
+Proteínas encontradas em chr1: 14009
+Proteínas encontradas em chr2: 18972
+Proteínas encontradas em chr3: 15561
+Proteínas encontradas em chr4: 10380
+Proteínas encontradas em chr5: 13892
+Proteínas encontradas em chr6: 14259
+Proteínas encontradas em chr7: 9857
+Proteínas encontradas em chr8: 11594
+Proteínas encontradas em chr9: 11643
+Proteínas encontradas em chr10: 11266
+Proteínas encontradas em chr11: 8350
+Proteínas encontradas em chr12: 9093
+Proteínas encontradas em chr13: 0
+Proteínas encontradas em chr14: 0
+Proteínas encontradas em chr15: 0
+Proteínas encontradas em chr16: 4422
+Proteínas encontradas em chr17: 4671
+Proteínas encontradas em chr18: 6451
+Proteínas encontradas em chr19: 2214
+Proteínas encontradas em chr20: 3349
+Proteínas encontradas em chr21: 0
+Proteínas encontradas em chr22: 0
+Total de proteínas encontradas em todos os arquivos: 169983

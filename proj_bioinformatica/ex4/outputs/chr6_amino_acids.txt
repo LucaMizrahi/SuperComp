@@ -1,0 +1,2 @@
+Sequência de aminoácidos para chr6:
+2 3 4 7 2 1 5 

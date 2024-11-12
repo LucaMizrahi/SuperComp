@@ -1,0 +1,2 @@
+Sequência de aminoácidos para chr1:
+4 7 3 3 4 2 5 4 7 2 5 2 7 3 4 7 2 3 4 

@@ -1,0 +1,2 @@
+Sequência de aminoácidos para chr8:
+1 4 7 2 7 7 7 7 5 7 6 2 2 
