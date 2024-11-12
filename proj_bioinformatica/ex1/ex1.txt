@@ -1,0 +1,5 @@
+Contagem de bases totais:
+A: 16019934
+T: 15961783
+C: 13268245
+G: 13230698
