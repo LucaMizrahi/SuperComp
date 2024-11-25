@@ -1,6 +1,6 @@
-Vector: 1 2 3 4 5 
-Process 1 partial sum of squares: 9
-Process 2 partial sum of squares: 16
-Process 0 partial sum of squares: 5
-Process 3 partial sum of squares: 25
-Total sum of squares: 55
+Vetor utilizado: 1 2 3 4 5 6 7 8 9 10 
+Processo 0 recebeu: 1 2 3 e calculou soma dos quadrados = 14
+Processo 1 recebeu: 4 5 6 e calculou soma dos quadrados = 77
+Processo 2 recebeu: 7 8 e calculou soma dos quadrados = 113
+Processo 3 recebeu: 9 10 e calculou soma dos quadrados = 181
+Soma total dos quadrados: 385

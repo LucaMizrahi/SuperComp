@@ -2,70 +2,80 @@
 #include <omp.h>
 #include <iostream>
 #include <vector>
+#include <cmath>
+#include <numeric>
 
-#define VECTOR_SIZE 5
+int main(int argc, char** argv) {
+    int rank, size;
 
-int main(int argc, char *argv[]) {
-    int rank, size, i;
-    double local_sum = 0.0, total_sum = 0.0;
-    int chunk_size, remainder;
-
-    // Inicializa o MPI
+    // Inicializa MPI
     MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank); // Obtém o rank do processo
-    MPI_Comm_size(MPI_COMM_WORLD, &size); // Obtém o número total de processos
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    // Calcula o tamanho do subvetor que cada processo irá manipular
-    chunk_size = VECTOR_SIZE / size;
-    remainder = VECTOR_SIZE % size;
-    std::vector<double> sub_vector(chunk_size + (rank < remainder ? 1 : 0));
-
-    std::vector<double> vector;
+    // Defina o tamanho do vetor e inicialize no processo raiz
+    const int VECTOR_SIZE = 10; // Você pode alterar para qualquer tamanho
+    std::vector<int> vector;
     if (rank == 0) {
-        // Apenas o processo raiz inicializa o vetor completo
         vector.resize(VECTOR_SIZE);
-        for (i = 0; i < VECTOR_SIZE; i++) {
-            vector[i] = i + 1; // Inicializa o vetor com valores de 1 a VECTOR_SIZE
+        for (int i = 0; i < VECTOR_SIZE; ++i) {
+            vector[i] = i + 1; // Inicializa com valores de 1 a VECTOR_SIZE
         }
-
-        // Imprime o vetor completo
-        std::cout << "Vector: ";
-        for (i = 0; i < VECTOR_SIZE; i++) {
-            std::cout << vector[i] << " ";
-        }
-        std::cout << std::endl;
     }
 
-    // Distribui partes do vetor completo para todos os processos
-    std::vector<int> sendcounts(size);
-    std::vector<int> displs(size);
-    int offset = 0;
-    for (i = 0; i < size; i++) {
-        sendcounts[i] = chunk_size + (i < remainder ? 1 : 0);
-        displs[i] = offset;
-        offset += sendcounts[i];
+    // Calcula o tamanho do subvetor para cada processo
+    int base_chunk_size = VECTOR_SIZE / size; // Parte básica para todos os processos
+    int remainder = VECTOR_SIZE % size;      // Resto para redistribuição
+    std::vector<int> send_counts(size), displs(size);
+
+    for (int i = 0; i < size; ++i) {
+        send_counts[i] = base_chunk_size + (i < remainder ? 1 : 0); // Distribui o resto
+        displs[i] = (i == 0 ? 0 : displs[i - 1] + send_counts[i - 1]); // Deslocamento
     }
 
-    MPI_Scatterv(vector.data(), sendcounts.data(), displs.data(), MPI_DOUBLE, sub_vector.data(), sub_vector.size(), MPI_DOUBLE, 0, MPI_COMM_WORLD);
+    // Aloca subvetor para cada processo
+    std::vector<int> sub_vector(send_counts[rank]);
 
-    // Calcula a soma dos quadrados dos elementos do subvetor usando OpenMP
+    // Distribui o vetor do processo raiz para todos os processos
+    MPI_Scatterv(
+        vector.data(), send_counts.data(), displs.data(), MPI_INT, 
+        sub_vector.data(), send_counts[rank], MPI_INT, 0, MPI_COMM_WORLD);
+
+    // Cada processo calcula a soma dos quadrados do seu subvetor usando OpenMP
+    double local_sum = 0.0;
     #pragma omp parallel for reduction(+:local_sum)
-    for (i = 0; i < sub_vector.size(); i++) {
-        local_sum += sub_vector[i] * sub_vector[i];
+    for (int i = 0; i < sub_vector.size(); ++i) {
+        local_sum += std::pow(sub_vector[i], 2);
     }
 
-    // Imprime o resultado parcial de cada processo
-    std::cout << "Process " << rank << " partial sum of squares: " << local_sum << std::endl;
-
-    // Reduz os resultados parciais de todos os processos para o processo raiz
+    // Reúne os resultados parciais no processo raiz
+    double total_sum = 0.0;
     MPI_Reduce(&local_sum, &total_sum, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 
-    // O processo raiz imprime o resultado final
+    // Exibe os resultados parciais em cada processo
+    std::vector<double> partial_sums(size);
+    MPI_Gather(&local_sum, 1, MPI_DOUBLE, partial_sums.data(), 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+
+    // Processo raiz exibe o resultado final
     if (rank == 0) {
-        std::cout << "Total sum of squares: " << total_sum << std::endl;
+        std::cout << "Vetor utilizado: ";
+        for (int val : vector) {
+            std::cout << val << " ";
+        }
+        std::cout << "\n";
+
+        for (int i = 0; i < size; ++i) {
+            std::cout << "Processo " << i << " recebeu: ";
+            for (int j = displs[i]; j < displs[i] + send_counts[i]; ++j) {
+                std::cout << vector[j] << " ";
+            }
+            std::cout << "e calculou soma dos quadrados = " << partial_sums[i] << "\n";
+        }
+
+        std::cout << "Soma total dos quadrados: " << total_sum << "\n";
     }
 
-    // Finaliza o MPI
+    // Finaliza MPI
     MPI_Finalize();
     return 0;
 }
