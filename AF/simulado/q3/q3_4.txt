@@ -1,0 +1,7 @@
+Running matrix multiplication tests...
+Testing for matrix size 500:
+Matrix size: 500x500 - Time taken: 0.23933 seconds.
+Testing for matrix size 1000:
+Matrix size: 1000x1000 - Time taken: 1.93083 seconds.
+Testing for matrix size 2000:
+Matrix size: 2000x2000 - Time taken: 19.9543 seconds.
