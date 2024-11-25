@@ -1,0 +1,6 @@
+Vector: 1 2 3 4 5 
+Process 1 partial sum of squares: 9
+Process 2 partial sum of squares: 16
+Process 0 partial sum of squares: 5
+Process 3 partial sum of squares: 25
+Total sum of squares: 55
