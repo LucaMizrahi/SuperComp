@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
     // Defina o tamanho do vetor e inicialize no processo raiz
-    const int VECTOR_SIZE = 10; // Você pode alterar para qualquer tamanho
+    const int VECTOR_SIZE = 10;
     std::vector<int> vector;
     if (rank == 0) {
         vector.resize(VECTOR_SIZE);
