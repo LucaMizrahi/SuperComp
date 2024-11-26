@@ -1,0 +1,4 @@
+Vetor: 1 2 3 4 5 
+Média: 3
+Maior valor: 5
+Produto dos elementos: 120
