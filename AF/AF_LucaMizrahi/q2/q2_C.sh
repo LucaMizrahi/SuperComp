@@ -3,7 +3,7 @@
 #SBATCH --output=q2_C.txt         # Nome do arquivo de saída
 #SBATCH --ntasks=4                # Número de processos
 #SBATCH --cpus-per-task=1         # Número de threads por processo  
-#SBATCH --mem=4096                # Quantidade de memória (ou 3G)
+#SBATCH --mem=4096                # Quantidade de memória
 #SBATCH --time=02:00:00           # Tempo máximo de execução
 #SBATCH --partition=espec         # Fila (partition) a ser utilizada
 

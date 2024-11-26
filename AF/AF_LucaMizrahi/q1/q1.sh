@@ -4,7 +4,7 @@
 #SBATCH --nodes=5                 # Número de máquinas
 #SBATCH --tasks-per-node=1        # Número de tarefas por máquina
 #SBATCH --cpus-per-task=4         # Número de threads por tarefa
-#SBATCH --mem=16G                 # Quantidade de memória (ou 16G)
+#SBATCH --mem=16G                 # Quantidade de memória
 #SBATCH --time=01:00:00           # Tempo máximo de execução
 #SBATCH --partition=prova         # Fila (partition) a ser utilizada
 

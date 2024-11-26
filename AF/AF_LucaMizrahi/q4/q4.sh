@@ -1,13 +1,13 @@
 #!/bin/bash
-#SBATCH --job-name=PF             # Nome do job
-#SBATCH --output=q2_D.txt         # Nome do arquivo de saída
+#SBATCH --job-name=job_simulado   # Nome do job
+#SBATCH --output=q4.txt           # Nome do arquivo de saída
 #SBATCH --ntasks=4                # Número de processos
-#SBATCH --cpus-per-task=1         # Número de threads por processo  
+#SBATCH --cpus-per-task=5         # Número de threads por processo  
 #SBATCH --mem=4096                # Quantidade de memória
 #SBATCH --time=02:00:00           # Tempo máximo de execução
 #SBATCH --partition=espec         # Fila (partition) a ser utilizada
 
 # Exporta a variável de ambiente para definir o número de threads
-export OMP_NUM_THREADS=4
+export OMP_NUM_THREADS=10
 
-./parteD
+mpirun -np 4 ./q4
