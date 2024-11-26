@@ -6,7 +6,7 @@
 #include <cstdlib>
 
 // Tamanho do vetor de teste reduzido para facilitar a visualização
-#define MATRIX_SIZE 4
+#define MATRIX_SIZE 5
 
 // Função para calcular a média das linhas de uma submatriz
 std::vector<double> calculateLineAverages(const std::vector<std::vector<int>>& submatrix) {

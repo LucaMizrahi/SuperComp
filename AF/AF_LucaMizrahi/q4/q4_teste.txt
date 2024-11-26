@@ -1,13 +1,15 @@
 Matriz de entrada:
-1 2 3 4 
-2 4 6 8 
-3 6 9 12 
-4 8 12 16 
+1 2 3 4 5 
+2 4 6 8 10 
+3 6 9 12 15 
+4 8 12 16 20 
+5 10 15 20 25 
 
 Médias das linhas:
-Linha 0: 2.5
-Linha 1: 5
-Linha 2: 7.5
-Linha 3: 10
+Linha 0: 3
+Linha 1: 6
+Linha 2: 9
+Linha 3: 12
+Linha 4: 15
 
-Média total de todas as linhas: 6.25
+Média total de todas as linhas: 9
