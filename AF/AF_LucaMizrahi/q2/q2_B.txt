@@ -1,0 +1,2 @@
+Vetor original: 1 2 3 4 
+Vetor normalizado: 0.182574 0.365148 0.547723 0.730297 

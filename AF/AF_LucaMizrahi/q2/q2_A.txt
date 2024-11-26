@@ -1,0 +1,2 @@
+Número de threads disponíveis: 4
+Fatorial de 3 é 6
