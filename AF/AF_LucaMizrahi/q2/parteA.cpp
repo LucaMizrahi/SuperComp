@@ -14,7 +14,7 @@ long long factorial(int n) {
 }
 
 int main() {
-    int number = 3;
+    int number = 5;
 
     // Exibe o número de threads disponíveis
     #pragma omp parallel
